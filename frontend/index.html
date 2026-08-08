@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Todo List</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📝 My Todo List</h1>
+
+        <!-- Add Todo -->
+        <div class="todo-input">
+
+            <input
+                type="text"
+                id="todoInput"
+                placeholder="Enter a todo..."
+                autocomplete="off"
+            >
+
+            <button id="addTodoBtn">
+                Add Todo
+            </button>
+
+        </div>
+
+        <!-- Loading message -->
+        <p id="loading">Loading todos...</p>
+
+        <!-- Todo list -->
+        <ul id="todoList"></ul>
+
+        <!-- Error message -->
+        <p id="errorMessage"></p>
+
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
