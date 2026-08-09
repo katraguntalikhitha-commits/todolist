@@ -2,7 +2,7 @@
 // API URL
 // ==========================================
 
-const API_URL = "http://localhost:5000/api/todos";
+const API_URL = "https://todolist-backend-la5i.onrender.com/api/todos";
 
 
 // ==========================================
