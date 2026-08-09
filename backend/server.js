@@ -13,6 +13,7 @@ app.use(express.json());
 
 connectDB();
 
+app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
 
 app.get("/", (req, res) => {

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Todo List</title>
@@ -13,11 +11,118 @@
 
 <body>
 
-    <div class="container">
+    <!-- ============================= -->
+    <!-- AUTH SECTION -->
+    <!-- ============================= -->
 
-        <h1>📝 My Todo List</h1>
+    <div class="auth-container" id="authContainer">
+
+        <h1>Todo List</h1>
+
+        <!-- Login -->
+
+        <div id="loginSection">
+
+            <h2>Login</h2>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Email"
+                autocomplete="email"
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+            <button id="loginBtn">
+                Login
+            </button>
+
+            <p id="loginMessage"></p>
+
+            <p>
+                Don't have an account?
+                <button id="showRegisterBtn">
+                    Register
+                </button>
+            </p>
+
+        </div>
+
+
+        <!-- Register -->
+
+        <div id="registerSection" style="display: none;">
+
+            <h2>Create Account</h2>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Name"
+                autocomplete="name"
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email"
+                autocomplete="email"
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password (minimum 6 characters)"
+                autocomplete="new-password"
+            >
+
+            <button id="registerBtn">
+                Register
+            </button>
+
+            <p id="registerMessage"></p>
+
+            <p>
+                Already have an account?
+                <button id="showLoginBtn">
+                    Login
+                </button>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- TODO SECTION -->
+    <!-- ============================= -->
+
+    <div class="container" id="todoContainer" style="display: none;">
+
+        <div class="todo-header">
+
+            <h1>📝 My Todo List</h1>
+
+            <div>
+                <span id="welcomeUser"></span>
+
+                <button id="logoutBtn">
+                    Logout
+                </button>
+            </div>
+
+        </div>
+
 
         <!-- Add Todo -->
+
         <div class="todo-input">
 
             <input
@@ -33,19 +138,27 @@
 
         </div>
 
-        <!-- Loading message -->
-        <p id="loading">Loading todos...</p>
+
+        <!-- Loading -->
+
+        <p id="loading">
+            Loading todos...
+        </p>
+
 
         <!-- Todo list -->
+
         <ul id="todoList"></ul>
 
-        <!-- Error message -->
+
+        <!-- Error -->
+
         <p id="errorMessage"></p>
 
     </div>
 
+
     <script src="js/script.js"></script>
 
 </body>
-
 </html>

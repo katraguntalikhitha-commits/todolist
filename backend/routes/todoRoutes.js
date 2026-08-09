@@ -8,16 +8,18 @@ const {
     deleteTodo
 } = require("../controllers/todoController");
 
+const protect = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-router.get("/", getTodos);
+router.get("/", protect, getTodos);
 
-router.get("/:id", getTodo);
+router.get("/:id", protect, getTodo);
 
-router.post("/", createTodo);
+router.post("/", protect, createTodo);
 
-router.put("/:id", updateTodo);
+router.put("/:id", protect, updateTodo);
 
-router.delete("/:id", deleteTodo);
+router.delete("/:id", protect, deleteTodo);
 
 module.exports = router;
