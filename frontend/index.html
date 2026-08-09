@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Todo List</title>
 
@@ -11,154 +16,278 @@
 
 <body>
 
-    <!-- ============================= -->
-    <!-- AUTH SECTION -->
-    <!-- ============================= -->
+    <!-- ==========================================
+         AUTH SECTION
+    =========================================== -->
 
-    <div class="auth-container" id="authContainer">
+    <div class="container auth-container" id="authContainer">
 
-        <h1>Todo List</h1>
+        <div class="auth-card">
 
-        <!-- Login -->
+            <div class="app-logo">
+                ✓
+            </div>
 
-        <div id="loginSection">
+            <h1>My Todo List</h1>
 
-            <h2>Login</h2>
-
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="Email"
-                autocomplete="email"
-            >
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Password"
-                autocomplete="current-password"
-            >
-
-            <button id="loginBtn">
-                Login
-            </button>
-
-            <p id="loginMessage"></p>
-
-            <p>
-                Don't have an account?
-                <button id="showRegisterBtn">
-                    Register
-                </button>
+            <p class="subtitle">
+                Organize your tasks. Stay productive.
             </p>
 
-        </div>
+
+            <!-- ==============================
+                 LOGIN
+            =============================== -->
+
+            <div id="loginSection">
+
+                <h2>Welcome Back 👋</h2>
+
+                <p class="form-description">
+                    Login to manage your personal tasks.
+                </p>
+
+                <label for="loginEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
 
 
-        <!-- Register -->
+                <label for="loginPassword">
+                    Password
+                </label>
 
-        <div id="registerSection" style="display: none;">
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                >
 
-            <h2>Create Account</h2>
 
-            <input
-                type="text"
-                id="registerName"
-                placeholder="Name"
-                autocomplete="name"
-            >
-
-            <input
-                type="email"
-                id="registerEmail"
-                placeholder="Email"
-                autocomplete="email"
-            >
-
-            <input
-                type="password"
-                id="registerPassword"
-                placeholder="Password (minimum 6 characters)"
-                autocomplete="new-password"
-            >
-
-            <button id="registerBtn">
-                Register
-            </button>
-
-            <p id="registerMessage"></p>
-
-            <p>
-                Already have an account?
-                <button id="showLoginBtn">
+                <button
+                    id="loginBtn"
+                    class="primary-btn"
+                >
                     Login
                 </button>
-            </p>
+
+
+                <p
+                    id="loginMessage"
+                    class="message"
+                ></p>
+
+
+                <div class="switch-auth">
+
+                    <span>
+                        Don't have an account?
+                    </span>
+
+                    <button
+                        id="showRegisterBtn"
+                        class="link-btn"
+                    >
+                        Register
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 REGISTER
+            =============================== -->
+
+            <div
+                id="registerSection"
+                style="display: none;"
+            >
+
+                <h2>Create Account 🚀</h2>
+
+                <p class="form-description">
+                    Create your account and start organizing.
+                </p>
+
+
+                <label for="registerName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Enter your name"
+                    autocomplete="name"
+                >
+
+
+                <label for="registerEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
+
+
+                <label for="registerPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Minimum 6 characters"
+                    autocomplete="new-password"
+                >
+
+
+                <button
+                    id="registerBtn"
+                    class="primary-btn"
+                >
+                    Create Account
+                </button>
+
+
+                <p
+                    id="registerMessage"
+                    class="message"
+                ></p>
+
+
+                <div class="switch-auth">
+
+                    <span>
+                        Already have an account?
+                    </span>
+
+                    <button
+                        id="showLoginBtn"
+                        class="link-btn"
+                    >
+                        Login
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- ============================= -->
-    <!-- TODO SECTION -->
-    <!-- ============================= -->
+    <!-- ==========================================
+         TODO SECTION
+    =========================================== -->
 
-    <div class="container" id="todoContainer" style="display: none;">
+    <div
+        class="container todo-container"
+        id="todoContainer"
+        style="display: none;"
+    >
+
+        <!-- Header -->
 
         <div class="todo-header">
 
-            <h1>📝 My Todo List</h1>
+            <div class="header-left">
 
-            <div>
-                <span id="welcomeUser"></span>
+                <div class="app-logo small-logo">
+                    ✓
+                </div>
 
-                <button id="logoutBtn">
-                    Logout
-                </button>
+                <div>
+
+                    <h1>My Todo List</h1>
+
+                    <p id="welcomeUser">
+                        Welcome!
+                    </p>
+
+                </div>
+
             </div>
+
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
 
         </div>
 
 
-        <!-- Add Todo -->
+        <!-- ==============================
+             ADD TODO
+        =============================== -->
 
         <div class="todo-input">
 
             <input
                 type="text"
                 id="todoInput"
-                placeholder="Enter a todo..."
+                placeholder="What do you need to accomplish?"
                 autocomplete="off"
             >
 
-            <button id="addTodoBtn">
-                Add Todo
+            <button
+                id="addTodoBtn"
+                class="add-btn"
+            >
+                + Add Task
             </button>
 
         </div>
 
 
-        <!-- Loading -->
+        <!-- ==============================
+             LOADING
+        =============================== -->
 
         <p id="loading">
-            Loading todos...
+            Loading your tasks...
         </p>
 
 
-        <!-- Todo list -->
+        <!-- ==============================
+             TODO LIST
+        =============================== -->
 
         <ul id="todoList"></ul>
 
 
-        <!-- Error -->
+        <!-- ==============================
+             ERROR
+        =============================== -->
 
         <p id="errorMessage"></p>
 
     </div>
 
 
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
     <script src="js/script.js"></script>
 
 </body>
+
 </html>
