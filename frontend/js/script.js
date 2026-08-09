@@ -1,5 +1,5 @@
 // ==========================================
-// API URL
+// API URLS
 // ==========================================
 
 const API_URL =
@@ -10,25 +10,56 @@ const AUTH_URL =
 
 
 // ==========================================
-// Get HTML Elements
+// GET HTML ELEMENTS
 // ==========================================
 
-const authContainer = document.getElementById("authContainer");
-const todoContainer = document.getElementById("todoContainer");
+const authContainer =
+    document.getElementById("authContainer");
 
-const loginSection = document.getElementById("loginSection");
-const registerSection = document.getElementById("registerSection");
+const todoContainer =
+    document.getElementById("todoContainer");
 
-const loginEmail = document.getElementById("loginEmail");
-const loginPassword = document.getElementById("loginPassword");
-const loginBtn = document.getElementById("loginBtn");
-const loginMessage = document.getElementById("loginMessage");
+const loginSection =
+    document.getElementById("loginSection");
 
-const registerName = document.getElementById("registerName");
-const registerEmail = document.getElementById("registerEmail");
-const registerPassword = document.getElementById("registerPassword");
-const registerBtn = document.getElementById("registerBtn");
-const registerMessage = document.getElementById("registerMessage");
+const registerSection =
+    document.getElementById("registerSection");
+
+
+// Login elements
+
+const loginEmail =
+    document.getElementById("loginEmail");
+
+const loginPassword =
+    document.getElementById("loginPassword");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+
+// Register elements
+
+const registerName =
+    document.getElementById("registerName");
+
+const registerEmail =
+    document.getElementById("registerEmail");
+
+const registerPassword =
+    document.getElementById("registerPassword");
+
+const registerBtn =
+    document.getElementById("registerBtn");
+
+const registerMessage =
+    document.getElementById("registerMessage");
+
+
+// Authentication buttons
 
 const showRegisterBtn =
     document.getElementById("showRegisterBtn");
@@ -38,6 +69,9 @@ const showLoginBtn =
 
 const logoutBtn =
     document.getElementById("logoutBtn");
+
+
+// Todo elements
 
 const welcomeUser =
     document.getElementById("welcomeUser");
@@ -63,45 +97,73 @@ const errorMessage =
 // ==========================================
 
 function getToken() {
+
     return localStorage.getItem("token");
+
 }
 
 
 function saveToken(token) {
-    localStorage.setItem("token", token);
+
+    localStorage.setItem(
+        "token",
+        token
+    );
+
 }
 
 
 function removeToken() {
+
     localStorage.removeItem("token");
+
 }
 
 
+// ==========================================
+// USER FUNCTIONS
+// ==========================================
+
 function getUser() {
-    const user = localStorage.getItem("user");
+
+    const user =
+        localStorage.getItem("user");
 
     if (!user) {
         return null;
     }
 
     try {
+
         return JSON.parse(user);
-    } catch {
+
+    } catch (error) {
+
+        console.error(
+            "Error reading user:",
+            error
+        );
+
         return null;
     }
+
 }
 
 
 function saveUser(user) {
+
     localStorage.setItem(
         "user",
         JSON.stringify(user)
     );
+
 }
 
 
 function removeUser() {
+
     localStorage.removeItem("user");
+
 }
 
 
@@ -111,12 +173,18 @@ function removeUser() {
 
 function showLogin() {
 
-    loginSection.style.display = "block";
+    loginSection.style.display =
+        "block";
 
-    registerSection.style.display = "none";
+    registerSection.style.display =
+        "none";
 
-    loginMessage.textContent = "";
-    registerMessage.textContent = "";
+    loginMessage.textContent =
+        "";
+
+    registerMessage.textContent =
+        "";
+
 }
 
 
@@ -126,12 +194,18 @@ function showLogin() {
 
 function showRegister() {
 
-    loginSection.style.display = "none";
+    loginSection.style.display =
+        "none";
 
-    registerSection.style.display = "block";
+    registerSection.style.display =
+        "block";
 
-    loginMessage.textContent = "";
-    registerMessage.textContent = "";
+    loginMessage.textContent =
+        "";
+
+    registerMessage.textContent =
+        "";
+
 }
 
 
@@ -141,18 +215,24 @@ function showRegister() {
 
 function showTodoApp() {
 
-    authContainer.style.display = "none";
+    authContainer.style.display =
+        "none";
 
-    todoContainer.style.display = "block";
+    todoContainer.style.display =
+        "block";
 
-    const user = getUser();
+    const user =
+        getUser();
 
     if (user) {
+
         welcomeUser.textContent =
             `Welcome, ${user.name}!`;
+
     }
 
     loadTodos();
+
 }
 
 
@@ -162,16 +242,19 @@ function showTodoApp() {
 
 function showAuth() {
 
-    authContainer.style.display = "block";
+    authContainer.style.display =
+        "block";
 
-    todoContainer.style.display = "none";
+    todoContainer.style.display =
+        "none";
 
     showLogin();
+
 }
 
 
 // ==========================================
-// REGISTER
+// REGISTER USER
 // ==========================================
 
 async function registerUser() {
@@ -185,6 +268,9 @@ async function registerUser() {
     const password =
         registerPassword.value;
 
+
+    // Validate fields
+
     if (!name || !email || !password) {
 
         registerMessage.textContent =
@@ -192,6 +278,7 @@ async function registerUser() {
 
         return;
     }
+
 
     if (password.length < 6) {
 
@@ -201,33 +288,39 @@ async function registerUser() {
         return;
     }
 
+
     try {
 
-        registerBtn.disabled = true;
+        registerBtn.disabled =
+            true;
 
         registerBtn.textContent =
-            "Registering...";
+            "Creating account...";
 
-        const response = await fetch(
-            `${AUTH_URL}/register`,
-            {
-                method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+        const response =
+            await fetch(
+                `${AUTH_URL}/register`,
+                {
+                    method: "POST",
 
-                body: JSON.stringify({
-                    name,
-                    email,
-                    password
-                })
-            }
-        );
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password
+                    })
+                }
+            );
+
 
         const data =
             await response.json();
+
 
         if (!response.ok) {
 
@@ -235,19 +328,36 @@ async function registerUser() {
                 data.message ||
                 "Registration failed"
             );
+
         }
 
-        // Save login information
+
+        // Save JWT
 
         saveToken(data.token);
 
+
+        // Save user
+
         saveUser(data.user);
 
-        registerName.value = "";
-        registerEmail.value = "";
-        registerPassword.value = "";
+
+        // Clear fields
+
+        registerName.value =
+            "";
+
+        registerEmail.value =
+            "";
+
+        registerPassword.value =
+            "";
+
+
+        // Open Todo application
 
         showTodoApp();
+
 
     } catch (error) {
 
@@ -259,18 +369,22 @@ async function registerUser() {
         registerMessage.textContent =
             error.message;
 
+
     } finally {
 
-        registerBtn.disabled = false;
+        registerBtn.disabled =
+            false;
 
         registerBtn.textContent =
-            "Register";
+            "Create Account";
+
     }
+
 }
 
 
 // ==========================================
-// LOGIN
+// LOGIN USER
 // ==========================================
 
 async function loginUser() {
@@ -281,6 +395,9 @@ async function loginUser() {
     const password =
         loginPassword.value;
 
+
+    // Validate
+
     if (!email || !password) {
 
         loginMessage.textContent =
@@ -289,32 +406,38 @@ async function loginUser() {
         return;
     }
 
+
     try {
 
-        loginBtn.disabled = true;
+        loginBtn.disabled =
+            true;
 
         loginBtn.textContent =
             "Logging in...";
 
-        const response = await fetch(
-            `${AUTH_URL}/login`,
-            {
-                method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+        const response =
+            await fetch(
+                `${AUTH_URL}/login`,
+                {
+                    method: "POST",
 
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            }
-        );
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
+            );
+
 
         const data =
             await response.json();
+
 
         if (!response.ok) {
 
@@ -322,18 +445,33 @@ async function loginUser() {
                 data.message ||
                 "Login failed"
             );
+
         }
+
 
         // Save JWT
 
         saveToken(data.token);
 
+
+        // Save user
+
         saveUser(data.user);
 
-        loginEmail.value = "";
-        loginPassword.value = "";
+
+        // Clear fields
+
+        loginEmail.value =
+            "";
+
+        loginPassword.value =
+            "";
+
+
+        // Open Todo application
 
         showTodoApp();
+
 
     } catch (error) {
 
@@ -345,13 +483,17 @@ async function loginUser() {
         loginMessage.textContent =
             error.message;
 
+
     } finally {
 
-        loginBtn.disabled = false;
+        loginBtn.disabled =
+            false;
 
         loginBtn.textContent =
             "Login";
+
     }
+
 }
 
 
@@ -365,9 +507,14 @@ function logout() {
 
     removeUser();
 
-    todoList.innerHTML = "";
+    todoList.innerHTML =
+        "";
+
+    todoInput.value =
+        "";
 
     showAuth();
+
 }
 
 
@@ -380,25 +527,37 @@ async function authenticatedFetch(
     options = {}
 ) {
 
-    const token = getToken();
+    const token =
+        getToken();
+
 
     if (!token) {
 
         throw new Error(
             "You are not logged in."
         );
+
     }
 
+
     const headers = {
+
         ...(options.headers || {}),
+
         "Authorization":
             `Bearer ${token}`
+
     };
 
-    return fetch(url, {
-        ...options,
-        headers
-    });
+
+    return fetch(
+        url,
+        {
+            ...options,
+            headers
+        }
+    );
+
 }
 
 
@@ -410,67 +569,90 @@ async function loadTodos() {
 
     try {
 
-        loading.style.display = "block";
+        loading.style.display =
+            "block";
 
-        errorMessage.textContent = "";
+        errorMessage.textContent =
+            "";
+
 
         const response =
             await authenticatedFetch(
                 API_URL
             );
 
+
+        // Token expired / invalid
+
         if (response.status === 401) {
 
             logout();
 
             return;
+
         }
+
 
         if (!response.ok) {
 
             throw new Error(
                 "Failed to load todos"
             );
+
         }
+
 
         const todos =
             await response.json();
 
-        todoList.innerHTML = "";
 
-        loading.style.display = "none";
+        todoList.innerHTML =
+            "";
 
+
+        loading.style.display =
+            "none";
+
+
+        // No todos
 
         if (todos.length === 0) {
 
             todoList.innerHTML = `
                 <li class="empty">
-                    No todos yet. Add your first todo! 🎯
+                    No tasks yet. Add your first task! 🎯
                 </li>
             `;
 
             return;
+
         }
 
 
-        todos.forEach(todo => {
+        // Display todos
 
-            displayTodo(todo);
+        todos.forEach(
+            todo => displayTodo(todo)
+        );
 
-        });
 
     } catch (error) {
 
-        loading.style.display = "none";
+        loading.style.display =
+            "none";
 
-        errorMessage.textContent =
-            "Unable to connect to the server.";
 
         console.error(
             "Error loading todos:",
             error
         );
+
+
+        errorMessage.textContent =
+            "Unable to load your tasks. Please try again.";
+
     }
+
 }
 
 
@@ -483,23 +665,30 @@ async function addTodo() {
     const title =
         todoInput.value.trim();
 
+
+    // Empty input
+
     if (title === "") {
 
         alert(
-            "Please enter a todo!"
+            "Please enter a task!"
         );
 
         todoInput.focus();
 
         return;
+
     }
+
 
     try {
 
-        addTodoBtn.disabled = true;
+        addTodoBtn.disabled =
+            true;
 
         addTodoBtn.textContent =
             "Adding...";
+
 
         const response =
             await authenticatedFetch(
@@ -518,25 +707,48 @@ async function addTodo() {
                 }
             );
 
+
+        // Token invalid
+
         if (response.status === 401) {
 
             logout();
 
             return;
+
         }
+
+
+        const data =
+            await response.json();
+
 
         if (!response.ok) {
 
             throw new Error(
+                data.message ||
                 "Failed to create todo"
             );
+
         }
 
-        await response.json();
 
-        todoInput.value = "";
+        console.log(
+            "Todo created:",
+            data
+        );
+
+
+        // Clear input
+
+        todoInput.value =
+            "";
+
+
+        // Reload list
 
         await loadTodos();
+
 
     } catch (error) {
 
@@ -545,18 +757,23 @@ async function addTodo() {
             error
         );
 
+
         errorMessage.textContent =
-            "Unable to add todo.";
+            error.message ||
+            "Unable to add task.";
 
     } finally {
 
-        addTodoBtn.disabled = false;
+        addTodoBtn.disabled =
+            false;
 
         addTodoBtn.textContent =
-            "Add Todo";
+            "+ Add Task";
 
         todoInput.focus();
+
     }
+
 }
 
 
@@ -569,31 +786,43 @@ function displayTodo(todo) {
     const li =
         document.createElement("li");
 
+
     li.className =
         "todo-item";
 
 
+    // Todo text
+
     const span =
         document.createElement("span");
+
 
     span.textContent =
         todo.title;
 
-    span.className =
-        todo.completed
-            ? "completed"
-            : "";
+
+    if (todo.completed) {
+
+        span.classList.add(
+            "completed"
+        );
+
+    }
 
 
-    // Complete button
+    // ==========================================
+    // COMPLETE BUTTON
+    // ==========================================
 
     const completeButton =
         document.createElement("button");
+
 
     completeButton.textContent =
         todo.completed
             ? "Undo"
             : "Complete";
+
 
     completeButton.className =
         "complete-btn";
@@ -612,13 +841,17 @@ function displayTodo(todo) {
     );
 
 
-    // Delete button
+    // ==========================================
+    // DELETE BUTTON
+    // ==========================================
 
     const deleteButton =
         document.createElement("button");
 
+
     deleteButton.textContent =
         "Delete";
+
 
     deleteButton.className =
         "delete-btn";
@@ -628,11 +861,15 @@ function displayTodo(todo) {
         "click",
         () => {
 
-            deleteTodo(todo._id);
+            deleteTodo(
+                todo._id
+            );
 
         }
     );
 
+
+    // Add elements
 
     li.appendChild(span);
 
@@ -644,7 +881,9 @@ function displayTodo(todo) {
         deleteButton
     );
 
+
     todoList.appendChild(li);
+
 }
 
 
@@ -671,26 +910,46 @@ async function toggleTodo(
                     },
 
                     body: JSON.stringify({
-                        completed: !completed
+                        completed:
+                            !completed
                     })
                 }
             );
+
+
+        // Unauthorized
 
         if (response.status === 401) {
 
             logout();
 
             return;
+
         }
+
+
+        const data =
+            await response.json();
+
 
         if (!response.ok) {
 
             throw new Error(
+                data.message ||
                 "Failed to update todo"
             );
+
         }
 
+
+        console.log(
+            "Todo updated:",
+            data
+        );
+
+
         await loadTodos();
+
 
     } catch (error) {
 
@@ -699,9 +958,13 @@ async function toggleTodo(
             error
         );
 
+
         errorMessage.textContent =
-            "Unable to update todo.";
+            error.message ||
+            "Unable to update task.";
+
     }
+
 }
 
 
@@ -713,12 +976,16 @@ async function deleteTodo(id) {
 
     const confirmDelete =
         confirm(
-            "Are you sure you want to delete this todo?"
+            "Are you sure you want to delete this task?"
         );
 
+
     if (!confirmDelete) {
+
         return;
+
     }
+
 
     try {
 
@@ -730,21 +997,40 @@ async function deleteTodo(id) {
                 }
             );
 
+
+        // Unauthorized
+
         if (response.status === 401) {
 
             logout();
 
             return;
+
         }
+
+
+        const data =
+            await response.json();
+
 
         if (!response.ok) {
 
             throw new Error(
+                data.message ||
                 "Failed to delete todo"
             );
+
         }
 
+
+        console.log(
+            "Todo deleted:",
+            data
+        );
+
+
         await loadTodos();
+
 
     } catch (error) {
 
@@ -753,9 +1039,13 @@ async function deleteTodo(id) {
             error
         );
 
+
         errorMessage.textContent =
-            "Unable to delete todo.";
+            error.message ||
+            "Unable to delete task.";
+
     }
+
 }
 
 
@@ -763,25 +1053,31 @@ async function deleteTodo(id) {
 // EVENT LISTENERS
 // ==========================================
 
+// Login
+
 loginBtn.addEventListener(
     "click",
     loginUser
 );
+
+
+// Register
 
 registerBtn.addEventListener(
     "click",
     registerUser
 );
 
-logoutBtn.addEventListener(
-    "click",
-    logout
-);
+
+// Show register
 
 showRegisterBtn.addEventListener(
     "click",
     showRegister
 );
+
+
+// Show login
 
 showLoginBtn.addEventListener(
     "click",
@@ -789,42 +1085,68 @@ showLoginBtn.addEventListener(
 );
 
 
-// Press Enter in login
+// Logout
+
+logoutBtn.addEventListener(
+    "click",
+    logout
+);
+
+
+// Add Todo
+
+addTodoBtn.addEventListener(
+    "click",
+    addTodo
+);
+
+
+// ==========================================
+// ENTER KEY
+// ==========================================
+
+// Login with Enter
 
 loginPassword.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
         if (event.key === "Enter") {
+
             loginUser();
+
         }
 
     }
 );
 
 
-// Press Enter in register
+// Register with Enter
 
 registerPassword.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
         if (event.key === "Enter") {
+
             registerUser();
+
         }
 
     }
 );
 
 
-// Press Enter to add Todo
+// Add Todo with Enter
 
 todoInput.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
         if (event.key === "Enter") {
+
             addTodo();
+
         }
 
     }
@@ -832,16 +1154,19 @@ todoInput.addEventListener(
 
 
 // ==========================================
-// CHECK LOGIN ON PAGE LOAD
+// INITIALIZE APPLICATION
 // ==========================================
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        const token = getToken();
+        const token =
+            getToken();
 
-        const user = getUser();
+        const user =
+            getUser();
+
 
         if (token && user) {
 
